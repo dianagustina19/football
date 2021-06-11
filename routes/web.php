@@ -17,3 +17,7 @@ Route::get('/','HomeController@index');
 Route::get('/tim','HomeController@indextim');
 Route::get('/pertandingan','HomeController@indexpertandingan');
 Route::get('/pemain','HomeController@indexpemain');
+Route::get('/timcreate','HomeController@timcreate');
+Route::post('/timcreatePost','HomeController@timcreatePost');
+Route::get('/deletetim/{id}','HomeController@deletetim');
+Route::get('/edittim/{id}','HomeController@edittim');

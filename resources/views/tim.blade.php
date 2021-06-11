@@ -13,21 +13,27 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
+                                    <th>No.</th>
                                     <th>Nama Tim</th>
                                     <th>Kota Tim</th>
                                     <th><center>Action</center></th>
                                 </tr>
                             </thead>
                             <tbod>
+                            @foreach($tim as $key => $tim)
                                 <tr>
-                                    <td>xx</td>
-                                    <td>xx</td>
+                                    <td>{{$key+1}}.</td>
+                                    <td>{{$tim->nama_tim}}</td>
+                                    <td>{{$tim->kota}}</td>
                                     <td>
                                         <center>
-                                            <a href="" class="btn btn-black">Detail</a>
+                                            <a href="/detailtim/{{$tim->id}}" class="btn btn-black">Detail</a>
+                                            <a href="/edittim/{{$tim->id}}" class="btn btn-warning">Edit</a>
+                                            <a href="/deletetim/{{$tim->id}}" class="btn btn-danger">Delete</a>
                                         </center>
                                     </td>
                                 </tr>
+                            @endforeach
                             </tbod>
                         </table>
                         <a href="/timcreate" class="btn btn-success">Tambah Tim</a>
