@@ -9,16 +9,21 @@
                         <div class="tim-title">
                             <center><h3>Edit Tim</h3></center>
                                 </div><br>
-                                <form action="/edittimPost" method="POST" enctype="mutiple/form-data">
+                                <form action="/timupdate" method="POST" enctype="multipart/form-data">
                                 @csrf
                                     <table class="table table-bordered">
                                         <tr>
                                             <th>Nama Tim</th>
+                                            <input type="hidden" name="id" value="{{$tim->id}}">
                                             <td><input type="text" name="nama_tim" value="{{$tim->nama_tim}}" class="form-control"></td>
                                         </tr>
                                         <tr>
                                             <th>Logo Tim</th>
-                                            <td><input type="text" name="logo_tim" value="{{$tim->logo_tim}}" class="form-control"></td>
+                                            <td>
+                                                <img src="{{ url('/data_foto/'.$tim->logo_tim) }}" alt="" width="20%">
+                                                <input type="hidden" name="logo_tim_lama" value="{{$tim->logo_tim}}">
+                                                <input type="file" name="logo_tim_baru" value="" class="form-control">
+                                            </td>
                                         </tr>
                                         <tr>
                                             <th>Tahun Berdiri</th>
@@ -33,7 +38,8 @@
                                             <td><input type="text" name="kota" value="{{$tim->kota}}" class="form-control"></td>
                                         </tr>
                                     </table>
-                                    <button type="submit" class="btn btn-secondary">Edit</button>
+                                    <a href="/tim" class="btn btn-black"><i class="fa fa-arrow-left"></i>Kembali</a>
+                                    <button type="submit" class="btn btn-secondary"><i class="fa fa-pencil"></i>Edit</button>
                                 </form>
                         </div>
                 </div>

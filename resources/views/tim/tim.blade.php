@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tim-title">
-                            <center><h3>Tim</h3></center>
+                            <center><h3>Daftar Tim</h3></center>
                         </div><br>
                         <table class="table table-bordered">
                             <thead>
@@ -27,7 +27,7 @@
                                     <td>{{$tim->kota}}</td>
                                     <td>
                                         <center>
-                                            <a href="/detailtim/{{$tim->id}}" class="btn btn-black">Detail</a>
+                                            <a href="/detail/{{$tim->id}}" class="btn btn-black">Detail</a>
                                             <a href="/edittim/{{$tim->id}}" class="btn btn-warning">Edit</a>
                                             <a href="/deletetim/{{$tim->id}}" class="btn btn-danger">Delete</a>
                                         </center>

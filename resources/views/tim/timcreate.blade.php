@@ -9,7 +9,7 @@
                         <div class="tim-title">
                             <center><h3>Tambah Tim</h3></center>
                                 </div><br>
-                                <form action="/timcreatePost" method="POST" enctype="mutiple/form-data">
+                                <form action="/timcreatePost" method="POST" enctype="multipart/form-data">
                                 @csrf
                                     <table class="table table-bordered">
                                         <tr>
@@ -18,7 +18,7 @@
                                         </tr>
                                         <tr>
                                             <th>Logo Tim</th>
-                                            <td><input type="text" name="logo_tim" id="" class="form-control"></td>
+                                            <td><input type="file" name="logo_tim" id="" class="form-control"></td>
                                         </tr>
                                         <tr>
                                             <th>Tahun Berdiri</th>

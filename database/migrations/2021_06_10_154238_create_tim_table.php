@@ -17,7 +17,7 @@ class CreateTimTable extends Migration
             $table->id();
             $table->string('nama_tim');
             $table->string('logo_tim');
-            $table->string('tahun_berdiri');
+            $table->integer('tahun_berdiri');
             $table->string('alamat');
             $table->string('kota');
             $table->timestamps();

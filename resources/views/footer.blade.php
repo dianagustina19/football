@@ -1,4 +1,4 @@
-<footer class="footer-demo section-dark">
+<footer id="footer" class="footer-demo section-dark">
     <div class="container">
         <nav class="pull-left">
             <ul>

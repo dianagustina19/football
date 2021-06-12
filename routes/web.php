@@ -14,10 +14,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/','HomeController@index');
+
+//Tim
 Route::get('/tim','HomeController@indextim');
-Route::get('/pertandingan','HomeController@indexpertandingan');
-Route::get('/pemain','HomeController@indexpemain');
 Route::get('/timcreate','HomeController@timcreate');
 Route::post('/timcreatePost','HomeController@timcreatePost');
 Route::get('/deletetim/{id}','HomeController@deletetim');
 Route::get('/edittim/{id}','HomeController@edittim');
+Route::post('/timupdate','HomeController@timupdate');
+Route::get('/detail/{id}','HomeController@detail');
+
+//pemain
+Route::get('/pemain','HomeController@indexpemain');
+Route::get('/pemaincreate','HomeController@pemaincreate');
+Route::post('/pemaincreatePost','HomeController@pemaincreatePost');
+
+//pertandingan
+Route::get('/pertandingan','HomeController@indexpertandingan');

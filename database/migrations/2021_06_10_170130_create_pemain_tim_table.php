@@ -15,6 +15,12 @@ class CreatePemainTimTable extends Migration
     {
         Schema::create('pemain_tim', function (Blueprint $table) {
             $table->id();
+            $table->string('nama_pemain');
+            $table->integer('tinggi_badan');
+            $table->integer('berat_badan');
+            $table->string('posisi_pemain');
+            $table->integer('nomor_punggung');
+            $table->integer('tim');
             $table->timestamps();
         });
     }
