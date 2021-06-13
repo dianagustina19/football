@@ -34,7 +34,7 @@
       <a href="">
            <div class="logo-container">
                 <div class="logo">
-                    <img src="assets/paper_img/logo.jpeg" alt="Tim Logo">
+                    <img src="{{asset('assets/paper_img/logoo.png')}}" alt="Tim Logo">
                 </div>
                 <div class="brand">
                     Football

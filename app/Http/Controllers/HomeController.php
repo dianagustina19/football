@@ -5,13 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Tim;
 use App\Models\Pemain;
+use App\Models\Pertandingan;
+use DB;
+use Carbon\Carbon;
+
 
 class HomeController extends Controller
 {
     //TIM
     public function index()
     {
-        return view('index');
+        $pertandingan = Pertandingan::whereDate('tanggal_pertandingan', Carbon::today())->get();
+
+        return view('index',compact('pertandingan'));
     }
 
     public function indextim()
@@ -91,8 +97,9 @@ class HomeController extends Controller
     public function detail($id)
     {
         $tim = Tim::where('id',$id)->first();
+        $pemain = Pemain::where('tim',$id)->get();
 
-        return view('tim.detail',compact('tim'));
+        return view('tim.detail',compact('tim','pemain'));
     }
 
     public function deletetim($id)
@@ -105,7 +112,9 @@ class HomeController extends Controller
     //PEMAIN
     public function indexpemain()
     {
-        $pemain = Pemain::all();
+        $pemain = DB::table('pemain_tim')
+        ->leftjoin('tim','tim.id','=','pemain_tim.tim')
+        ->get();
 
         return view('pemain.pemain',compact('pemain'));
     }
@@ -113,6 +122,7 @@ class HomeController extends Controller
     public function pemaincreate()
     {
         $tim=Tim::all();
+
 
         return view('pemain.pemaincreate',compact('tim'));
     }
@@ -126,16 +136,81 @@ class HomeController extends Controller
         $nomor_punggung = $request->nomor_punggung;
         $tim_asal = $request->tim_asal;
 
-        $pemain= Pemain::insert([
-            'nama_pemain' => $nama_pemain,
-            'tinggi_badan' => $tinggi_badan,
-            'berat_badan' => $berat_badan,
-            'posisi_pemain' => $posisi_pemain,
-            'nomor_punggung' => $nomor_punggung,
-            'tim' => $tim_asal
+        $cek = DB::table('pemain_tim')
+        ->where('tim',$tim_asal)
+        ->where('nomor_punggung',$nomor_punggung)
+        ->count();
+
+        if ($cek == 1) {
+         
+            $data = ['status'=>false,'message'=>'Ups, Terjadi Kesalahan. Nomor Punggung Sudah Terpakai , Silakan Gunakan Nomor lain '];
+            return \Redirect::back()->withErrors(['Ups, Terjadi Kesalahan. Nomor Punggung Sudah Terpakai , Silakan Gunakan Nomor lain']);
+         }
+         else
+         {
+            $pemain= Pemain::insert([
+                'nama_pemain' => $nama_pemain,
+                'tinggi_badan' => $tinggi_badan,
+                'berat_badan' => $berat_badan,
+                'posisi_pemain' => $posisi_pemain,
+                'nomor_punggung' => $nomor_punggung,
+                'tim' => $tim_asal
+            ]);
+        
+            return redirect('pemain');
+         }
+
+      
+    }
+
+    //PERTANDINGAN
+    public function pertandingan()
+    {
+        $pertandingan = Pertandingan::all();
+
+        return view('pertandingan.pertandingan',compact('pertandingan'));
+    }
+
+    public function pertandingancreate()
+    {
+        $tim = Tim::all();
+        $tim1 = Tim::all();
+
+        return view('pertandingan.pertandingancreate',compact('tim','tim1'));
+    }
+
+    public function pertandingancreatePost(Request $request)
+    {
+        $waktu_pertandingan = $request->waktu_pertandingan;
+        $tanggal_pertandingan = $request->tanggal_pertandingan;
+        $tuan_rumah = $request->tuan_rumah;
+        $tamu = $request->tamu;
+
+        $pertandingan= Pertandingan::insert([
+            'tanggal_pertandingan' => $tanggal_pertandingan,
+            'waktu_pertandingan' => $waktu_pertandingan,
+            'tuan_rumah' => $tuan_rumah,
+            'tamu' => $tamu,
+            'status' => 1
         ]);
     
-        return redirect('pemain');
+        return redirect('pertandingan');
+    }
+
+    public function pertandingandetail()
+    {
+        return view('pertandingan.pertandingandetail');
+    }
+
+    public function pertandinganedit($id)
+    {
+        $tim = Pemain::all();
+        $pp = DB::table('tim')
+        ->leftjoin('pertandingan','tuan_rumah','=','tim.id')
+        ->where('pertandingan.id',$id)
+        ->first();
+        
+        return view('pertandingan.pertandinganedit',compact('pp','tim'));
     }
 
 }

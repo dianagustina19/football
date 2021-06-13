@@ -30,4 +30,8 @@ Route::get('/pemaincreate','HomeController@pemaincreate');
 Route::post('/pemaincreatePost','HomeController@pemaincreatePost');
 
 //pertandingan
-Route::get('/pertandingan','HomeController@indexpertandingan');
+Route::get('/pertandingan','HomeController@pertandingan');
+Route::get('/pertandingancreate','HomeController@pertandingancreate');
+Route::post('/pertandingancreatePost','HomeController@pertandingancreatePost');
+Route::get('/pertandingandetail/{id}','HomeController@pertandingandetail');
+Route::get('/pertandinganedit/{id}','HomeController@pertandinganedit');

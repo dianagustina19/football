@@ -1,5 +1,7 @@
 @include('header')
+
 <link href="//cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@4/bulma.css" rel="stylesheet">
+
 <div class="wrapper">
     <div class="section section-light-blue">
         <div class="container">
@@ -9,6 +11,28 @@
                         <div class="tim-title">
                             <center><h3>Tambah Pemain</h3></center>
                                 </div><br>
+                                @if(count($errors) > 0)
+                                    <div class="alert alert-danger">
+                                        Ada Kesalahan<br><br>
+                                    <ul>
+                                    @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                    </ul>
+                                    </div>
+                                @endif
+                                @if($message = Session::get('success'))
+                                <div class="alert alert-success alert-block">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <strong>{{ $message }}</strong>
+                                </div>
+                                @endif
+                                @if($message = Session::get('error'))
+                                <div class="alert alert-danger alert-block">
+                                    <button type="button" class="close" data-dismiss="alert">×</button>
+                                        <strong>{{ $message }}</strong>
+                                </div>
+                                @endif
                                 <form action="{{url('/pemaincreatePost')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                     <table class="table table-bordered">
@@ -17,11 +41,11 @@
                                             <td><input type="text" name="nama_pemain" id="nama_pemain" class="form-control"></td>
                                         </tr>
                                         <tr>
-                                            <th>Tinggi Badan</th>
+                                            <th>Tinggi Badan (Cm)</th>
                                             <td><input type="text" name="tinggi_badan" id="tinggi_badan" onkeypress="return hanyaAngka(event)" class="form-control"></td>
                                         </tr>
                                         <tr>
-                                            <th>Berat Badan</th>
+                                            <th>Berat Badan (Kg)</th>
                                             <td><input type="text" name="berat_badan" id="berat_badan" onkeypress="return hanyaAngka(event)" class="form-control"></td>
                                         </tr>
                                         <tr>
@@ -52,9 +76,10 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <button class="btn btn-secondary" onclick="return updatepm()" >Tambah</button>
+                                    <a href="/pemain" class="btn btn-fill btn-neutral"><i class="fa fa-arrow-left"></i> Kembali</a>
+                                    <button class="btn btn-fill btn-neutral" onclick="return updatepm()"><i class="fa fa-plus-circle"></i> Tambah</button>
                                 </form>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>

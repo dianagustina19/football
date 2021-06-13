@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePertandinganTable extends Migration
+class CreateGolTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,11 @@ class CreatePertandinganTable extends Migration
      */
     public function up()
     {
-        Schema::create('pertandingan', function (Blueprint $table) {
+        Schema::create('gol', function (Blueprint $table) {
             $table->id();
-            $table->string('tanggal_pertandingan');
-            $table->integer('waktu_pertandingan');
-            $table->integer('tuan_rumah');
-            $table->string('tamu');
-            $table->string('skor_akhir');
-            $table->boolean('status');
+            $table->string('pertandingan_id');
+            $table->integer('pemain_pencetak');
+            $table->integer('waktu_gol');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreatePertandinganTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pertandingan');
+        Schema::dropIfExists('gol');
     }
 }

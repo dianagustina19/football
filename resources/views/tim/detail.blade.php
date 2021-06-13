@@ -49,9 +49,8 @@
                                 </div><br>
 
                                 <div class="tab">
-                                <button class="tablinks" onclick="openCity(event, 'Tim')">Tim</button>
-                                <button class="tablinks" onclick="openCity(event, 'Pemain')">Pemain</button>
-                                <button class="tablinks" onclick="openCity(event, 'Pertandingan')">Pertandingan</button>
+                                  <button class="tablinks" onclick="openCity(event, 'Tim')">Tim</button>
+                                  <button class="tablinks" onclick="openCity(event, 'Pemain')">Pemain</button>
                                 </div>
 
                                 <div id="Tim" class="tabcontent">
@@ -63,17 +62,33 @@
                                 </div>
 
                                 <div id="Pemain" class="tabcontent">
-                                <h3>Paris</h3>
-                                <p>Paris is the capital of France.</p> 
-                                </div>
-
-                                <div id="Pertandingan" class="tabcontent">
-                                <h3>Tokyo</h3>
-                                <p>Tokyo is the capital of Japan.</p>
+                                <h3>Daftar Pemain</h3>
+                                <p>
+                                  <table class="table table-bordered">
+                                    <thead>
+                                      <tr>
+                                        <th><center>No.</center></th>
+                                        <th>Nama Pemain</th>
+                                        <th>Posisi Pemain</th>
+                                        <th>Nomor Punggung</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      @foreach($pemain as $key=> $p)
+                                      <tr>
+                                        <td><center>{{$key+1}}.</center></td>
+                                        <td>{{$p->nama_pemain}}</td>
+                                        <td>{{$p->posisi_pemain}}</td>
+                                        <td>{{$p->nomor_punggung}}</td>
+                                      </tr>
+                                      @endforeach
+                                    </tbody>
+                                  </table>
+                                </p> 
                                 </div>
 
                                 <br>    
-                                <a href="/tim" class="btn btn-black"><i class="fa fa-arrow-left"></i>Kembali</a>
+                                <a href="/tim" class="btn btn-fill btn-neutral"><i class="fa fa-arrow-left"></i> Kembali</a>
                       
                         </div>
                 </div>
@@ -84,7 +99,7 @@
 
 
 @include('footer')
-
+@include('js')
 
 <script>
 function openCity(evt, cityName) {

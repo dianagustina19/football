@@ -30,12 +30,12 @@
                                     <td>{{$tim->berat_badan}}</td>
                                     <td>{{$tim->posisi_pemain}}</td>
                                     <td>{{$tim->nomor_punggung}}</td>
-                                    <td>{{$tim->tim}}</td>
+                                    <td>{{$tim->nama_tim}}</td>
                                 </tr>
                             @endforeach
                             </tbod>
                         </table>
-                        <a href="/pemaincreate" class="btn btn-success">Tambah Pemain</a>
+                        <a href="/pemaincreate" class="btn btn-fill btn-neutral"><i class="fa fa-plus-circle"></i> Tambah Pemain</a>
                     </div>
                 </div>
             </div>
@@ -44,3 +44,4 @@
 </div>
 
 @include('footer')
+@include('js')

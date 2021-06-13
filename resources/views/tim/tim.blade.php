@@ -27,23 +27,23 @@
                                     <td>{{$tim->kota}}</td>
                                     <td>
                                         <center>
-                                            <a href="/detail/{{$tim->id}}" class="btn btn-black">Detail</a>
-                                            <a href="/edittim/{{$tim->id}}" class="btn btn-warning">Edit</a>
-                                            <a href="/deletetim/{{$tim->id}}" class="btn btn-danger">Delete</a>
+                                            <a href="/detail/{{$tim->id}}" class="btn btn-fill btn-black"><i class="fa fa-eye"></i>Detail</a>
+                                            <a href="/edittim/{{$tim->id}}" class="btn btn-fill btn-warning"><i class="fa fa-pencil"></i> Edit</a>
+                                            <a href="/deletetim/{{$tim->id}}" class="btn btn-fill btn-danger"><i class="fa fa-trash"></i> Delete</a>
                                         </center>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbod>
                         </table>
-                        <a href="/timcreate" class="btn btn-success">Tambah Tim</a>
+                        <a href="/timcreate" class="btn btn-fill btn-neutral"><i class="fa fa-plus-circle"></i> Tambah Tim</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<br><br><br>
-<div class="main">
+
 @include('footer')
-</div>
+@include('js')
+

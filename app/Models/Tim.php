@@ -10,4 +10,19 @@ class Tim extends Model
 {
     use SoftDeletes;
     protected $table = "Tim";
+
+    public function pertandingan()
+    {
+    	return $this->hasOne('App\Models\Pertandingan');
+    }
+
+    public function pertandingan2()
+    {
+    	return $this->hasOne('App\Models\Pertandingan');
+    }
+
+    public function pemain()
+    {
+    	return $this->haOne('App\Models\pemain');
+    }
 }
