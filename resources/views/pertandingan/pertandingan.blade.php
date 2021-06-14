@@ -34,6 +34,7 @@
                                 <div class="caption"> 
                                         <h4>{{$p->tim->nama_tim}} vs {{$p->tamu}}</h4>
                                         <p>Pertandingan Sepak Bola {{$p->tim->nama_tim}} melawan {{$p->tamu}}</p>
+                                        <p>Tanggal Pertandingan : {{$p->tanggal_pertandingan}}</p>
                                         <br>
                                         <p>
                                             <center>
@@ -61,3 +62,6 @@
         </div>
     </div>
 </div>
+
+@include('footer')
+@include('js')

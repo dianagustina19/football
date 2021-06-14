@@ -17,7 +17,9 @@ class HomeController extends Controller
     //TIM
     public function index()
     {
-        $pertandingan = Pertandingan::whereDate('tanggal_pertandingan', Carbon::today())->get();
+        $pertandingan = Pertandingan::orderBy('tanggal_pertandingan','desc')
+        ->limit(2)
+        ->get();
 
         return view('index',compact('pertandingan'));
     }
@@ -125,7 +127,6 @@ class HomeController extends Controller
     {
         $tim=Tim::all();
 
-
         return view('pemain.pemaincreate',compact('tim'));
     }
 
@@ -138,8 +139,7 @@ class HomeController extends Controller
         $nomor_punggung = $request->nomor_punggung;
         $tim_asal = $request->tim_asal;
 
-        $cek = DB::table('pemain_tim')
-        ->where('tim',$tim_asal)
+        $cek = Pemain::where('tim',$tim_asal)
         ->where('nomor_punggung',$nomor_punggung)
         ->count();
 
@@ -168,7 +168,7 @@ class HomeController extends Controller
     //PERTANDINGAN
     public function pertandingan()
     {
-        $pertandingan = Pertandingan::all();
+        $pertandingan = Pertandingan::orderBy('tanggal_pertandingan','desc')->get();
 
         return view('pertandingan.pertandingan',compact('pertandingan'));
     }
@@ -206,14 +206,12 @@ class HomeController extends Controller
 
     public function pertandingandetail($id)
     {
-        $pertandingan = DB::table('pertandingan')
-        ->join('gol','gol.pertandingan_id','=','pertandingan.id')
+        $pertandingan = Pertandingan::join('gol','gol.pertandingan_id','=','pertandingan.id')
         ->join('tim','tim.id','=','pertandingan.tuan_rumah')
         ->where('pertandingan.id',$id)
         ->first();
 
-        $gol = DB::table('pertandingan')
-        ->leftjoin('gol','gol.pertandingan_id','=','pertandingan.id')
+        $gol = Pertandingan::join('gol','gol.pertandingan_id','=','pertandingan.id')
         ->where('pertandingan.id',$id)
         ->get();
 
@@ -223,8 +221,7 @@ class HomeController extends Controller
     public function pertandinganedit($id)
     {
         $tim = Pemain::all();
-        $pp = DB::table('tim')
-        ->leftjoin('pertandingan','tuan_rumah','=','tim.id')
+        $pp = Tim::join('pertandingan','tuan_rumah','=','tim.id')
         ->where('pertandingan.id',$id)
         ->first();
         

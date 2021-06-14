@@ -37,7 +37,7 @@
                     <img src="{{asset('assets/paper_img/logoo.png')}}" alt="Tim Logo">
                 </div>
                 <div class="brand">
-                    Football
+                    Football XYZ
                 </div>
             </div>
       </a>

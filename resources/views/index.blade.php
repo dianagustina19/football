@@ -3,8 +3,8 @@
 <div class="wrapper">
     <div class="demo-header demo-header-image">
             <div class="motto">
-                <h1 class="title-uppercase">Paper Kit</h1>
-                <h3>Make your mark with a new design.</h3>
+                <h1 class="title-uppercase">Football XYZ</h1>
+                <h3>Association Football Champion</h3>
             </div>
     </div>
 </div>
@@ -28,12 +28,13 @@
                                     <center><img src="{{ url('/assets/paper_img/vs.jpg') }}" width="70%"></center>
                                 </div>
                                 <div class=" col-sm-4 col-sm-6">
-                                    <center><img src="{{ url('/data_foto/'.$p->tim2->logo_tim) }}" width="70%"></center>
+                                    <center><img src="{{ url('/data_foto/'.$p->logo_tamu) }}" width="70%"></center>
                                 </div>    
                                 <br><br><br><br>
                                 <div class="caption"> 
-                                        <h4>{{$p->tim->nama_tim}} vs {{$p->tim2->nama_tim}}</h4>
-                                        <p>Pertandingan bola {{$p->tim->nama_tim}} melawan {{$p->tim2->nama_tim}}</p>
+                                        <h4>{{$p->tim->nama_tim}} vs {{$p->tamu}}</h4>
+                                        <p>Pertandingan bola {{$p->tim->nama_tim}} melawan {{$p->tamu}}</p>
+                                        <p>Tanggal Pertandingan : {{$p->tanggal_pertandingan}}</p>
                                         <br>
                                         <p>
                                             <center>
