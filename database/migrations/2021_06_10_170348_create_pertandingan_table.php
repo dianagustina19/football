@@ -19,7 +19,8 @@ class CreatePertandinganTable extends Migration
             $table->integer('waktu_pertandingan');
             $table->integer('tuan_rumah');
             $table->string('tamu');
-            $table->string('skor_akhir');
+            $table->string('logo_tamu');
+            $table->string('skor_akhir')->nullable();
             $table->boolean('status');
             $table->timestamps();
         });

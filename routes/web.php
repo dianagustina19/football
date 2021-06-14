@@ -35,3 +35,4 @@ Route::get('/pertandingancreate','HomeController@pertandingancreate');
 Route::post('/pertandingancreatePost','HomeController@pertandingancreatePost');
 Route::get('/pertandingandetail/{id}','HomeController@pertandingandetail');
 Route::get('/pertandinganedit/{id}','HomeController@pertandinganedit');
+Route::post('/pertandinganeditPost','HomeController@pertandinganeditPost');

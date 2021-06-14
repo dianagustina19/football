@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use App\Models\Tim;
 use App\Models\Pemain;
 use App\Models\Pertandingan;
+use App\Models\Gol;
 use DB;
 use Carbon\Carbon;
 
@@ -185,21 +187,37 @@ class HomeController extends Controller
         $tanggal_pertandingan = $request->tanggal_pertandingan;
         $tuan_rumah = $request->tuan_rumah;
         $tamu = $request->tamu;
+        $logo_tamu = $request->logo_tamu;
+        $nama_file = time()."_".$logo_tamu->getClientOriginalName();
+		$tujuan_upload = 'data_foto';
+		$logo_tamu->move($tujuan_upload,$nama_file);
 
         $pertandingan= Pertandingan::insert([
             'tanggal_pertandingan' => $tanggal_pertandingan,
             'waktu_pertandingan' => $waktu_pertandingan,
             'tuan_rumah' => $tuan_rumah,
             'tamu' => $tamu,
+            'logo_tamu' => $nama_file,
             'status' => 1
         ]);
     
         return redirect('pertandingan');
     }
 
-    public function pertandingandetail()
+    public function pertandingandetail($id)
     {
-        return view('pertandingan.pertandingandetail');
+        $pertandingan = DB::table('pertandingan')
+        ->join('gol','gol.pertandingan_id','=','pertandingan.id')
+        ->join('tim','tim.id','=','pertandingan.tuan_rumah')
+        ->where('pertandingan.id',$id)
+        ->first();
+
+        $gol = DB::table('pertandingan')
+        ->leftjoin('gol','gol.pertandingan_id','=','pertandingan.id')
+        ->where('pertandingan.id',$id)
+        ->get();
+
+        return view('pertandingan.pertandingandetail',compact('pertandingan','gol'));
     }
 
     public function pertandinganedit($id)
@@ -211,6 +229,29 @@ class HomeController extends Controller
         ->first();
         
         return view('pertandingan.pertandinganedit',compact('pp','tim'));
+    }
+
+    public function pertandinganeditPost(Request $request)
+    {
+        $pertandingan = Pertandingan::where('id',$request->pertandingan_id)
+        ->update([
+            'status' => 0,
+            'skor_akhir' => $request->skor_akhir
+        ]);
+
+        $pemain_pencetak = $request->pemain_pencetak;
+        $waktu_gol = $request->waktu_gol;
+        $product = array();
+        $count = count($pemain_pencetak);
+        for($i = 0; $i < $count; $i++){ 
+            $product[]  = array(
+                'pemain_pencetak'=> $pemain_pencetak[$i],
+                'waktu_gol' => $waktu_gol[$i],
+                'pertandingan_id'=> $request->pertandingan_id );
+            }
+            DB::table('gol')->insert($product);
+
+        return redirect('pertandingan');
     }
 
 }

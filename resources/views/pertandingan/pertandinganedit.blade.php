@@ -11,11 +11,12 @@
                         <div class="tim-title">
                             <center><h3>Edit Pertandingan</h3></center>
                         </div><br>
-                        <form action="{{url('/pertandingancreatePost')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{url('/pertandinganeditPost')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                             <table class="table table-bordered">
                                 <tr>
                                     <th>Tanggal Pertandingan</th>
+                                    <input type="hidden" name="pertandingan_id" value="{{$pp->id}}">
                                     <td><input type="text" name="tanggal_pertandingan" id="tanggal_pertandingan" value="{{$pp->tanggal_pertandingan}}" class="form-control datepicker" readonly></td>
                                 </tr>
                                 <tr>
@@ -46,7 +47,7 @@
                                 </tr>
                                 <tr class="showCta">
                                     <th>Skor Akhir</th>
-                                    <td><input type="text" name="hasil_akhir" id="hasil_akhir" class="form-control"></td>
+                                    <td><input type="text" name="skor_akhir" id="skor_akhir" class="form-control"></td>
                                 </tr>
                                 <tr class="showCta">
                                     <th>Pemain Pencetak / Waktu Gol</th>
@@ -54,14 +55,10 @@
                                     <ul id="'+i+'" style="list-style-type: none;">
                                         <li>
                                         <div class="col-md-4">
-                                            <select name="" id="" class="form-control">
-                                                @foreach($tim as $t)
-                                                    <option value="{{$t->id}}">{{$t->nama_pemain}}</option>
-                                                @endforeach
-                                            </select>
+                                            <input type="text" name="pemain_pencetak[]" id="pemain_pencetak" class="form-control">
                                         </div>
                                         <div class="col-md-4">
-                                            <input type="text" onkeypress="return hanyaAngka(event)" class="form-control">
+                                            <input type="text" onkeypress="return hanyaAngka(event)" name="waktu_gol[]" id="waktu_gol" class="form-control">
                                         </div>
                                         <button class="btn btn-fill btn-neutral" type="button" onclick="myFunction()" id="add"><i class="fa fa-plus" aria-hidden="true"></i> Tambah</button>
                                         </li>
@@ -101,13 +98,13 @@
         return false;
         return true;
     }
-    function myFunction(a) {
-        var div = document.createElement("li");
-        div.innerHTML = ' <div class="col-md-4"><select name="" id="" class="form-control">@foreach($tim as $t)<option value="{{$t->id}}">{{$t->nama_pemain}}</option>@endforeach</select></div><div class="col-md-4"><input type="text" onkeypress="return hanyaAngka(event)" class="form-control"></div><div class="form-group col-sm-4"><label>Action</label><br><a class="btn btn-sm btn-danger" data-toggle="tooltip" id="hapusajamenu" data-placement="bottom" title=" Detail Product "><i class="fa fa-trash"></i></a></div></div>';
+    // function myFunction(a) {
+    //     var div = document.createElement("li");
+    //     div.innerHTML = ' <div class="col-md-4"><select name="" id="" class="form-control">@foreach($tim as $t)<option value="{{$t->id}}">{{$t->nama_pemain}}</option>@endforeach</select></div><div class="col-md-4"><input type="text" onkeypress="return hanyaAngka(event)" class="form-control"></div><div class="form-group col-sm-4"><label>Action</label><br><a class="btn btn-sm btn-danger" data-toggle="tooltip" id="hapusajamenu" data-placement="bottom" title=" Detail Product "><i class="fa fa-trash"></i></a></div></div>';
 
-        document.getElementById(a).appendChild(div);
+    //     document.getElementById(a).appendChild(div);
 
-    }
+    // }
 
     //radio box check uncheck
     $('input[type="radio"]').change(function(){

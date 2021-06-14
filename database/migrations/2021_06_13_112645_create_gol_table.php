@@ -16,8 +16,8 @@ class CreateGolTable extends Migration
         Schema::create('gol', function (Blueprint $table) {
             $table->id();
             $table->string('pertandingan_id');
-            $table->integer('pemain_pencetak');
-            $table->integer('waktu_gol');
+            $table->string('pemain_pencetak');
+            $table->string('waktu_gol');
             $table->timestamps();
         });
     }

@@ -39,6 +39,12 @@
                                         <input type="text" name="tamu" id="tamu" class="form-control">
                                     </td>
                                 </tr>
+                                <tr>
+                                    <th>Logo Tim Tamu</th>
+                                    <td>
+                                        <input type="file" name="logo_tamu" id="logo_tamu" class="form-control">
+                                    </td>
+                                </tr>
                             </table>
                                 <a href="/pertandingan" class="btn btn-fill btn-neutral"><i class="fa fa-arrow-left"></i> Kembali</a>
                                 <button class="btn btn-fill btn-neutral" onclick="return updatepm()" ><i class="fa fa-plus"></i> Tambah</button>
